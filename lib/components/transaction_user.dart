@@ -23,10 +23,7 @@ class _TransactionUserState extends State<TransactionUser> {
 }
 
    final List<Transaction> _transaction = [
-     Transaction(
-       title: "hehe",
-       trackCode: "LX002249507BR",
-     ),
+
 ];
 
   @override
