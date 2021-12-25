@@ -1,4 +1,4 @@
-# track
+# EncoTrack
 
 A new Flutter project.
 
