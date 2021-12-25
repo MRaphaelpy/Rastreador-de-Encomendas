@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Help_Page extends StatefulWidget {
   const Help_Page({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _Help_PageState extends State<Help_Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Agradecimentos e Ajuda"),
+        title: Text("Agradecimentos e Ajuda",),
         centerTitle: true,
         backgroundColor: Colors.purple,
       ),
@@ -31,7 +32,9 @@ class _Help_PageState extends State<Help_Page> {
               Center(
                 child: Text(
                   "Obrigado pela Ajuda",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+                  style: GoogleFonts.pacifico(
+                    fontSize: 30
+                  ),
                 ),
               ),
               SizedBox(

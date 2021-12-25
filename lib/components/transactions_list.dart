@@ -20,7 +20,7 @@ class TransactionList extends StatelessWidget {
               onTap: (){
                  Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage(codigo: tr.trackCode, title: tr.title,)));
               },
-              leading: Image.asset("images/truck.png"),
+              leading: Image.asset("images/truckan.gif"),
               title: Text(tr.title!),
               subtitle: Text(tr.trackCode!),
               trailing: Row(
