@@ -1,16 +1,17 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:track/error_page.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatefulWidget {
 
 String? codigo;
 String? title;
 
-HomePage({this.codigo, this.title});
+HomePage({Key? key, this.codigo, this.title}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -27,10 +28,7 @@ class _HomePageState extends State<HomePage> {
       encomendasTrack = jsonDecode(response.body);
     return encomendasTrack;
   }
-  /*@override
-  void initState() {
-    this._getData();
-  }*/
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -56,18 +54,19 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.qr_code,size: 30,),
+                          const Icon(Icons.qr_code,size: 30,),
                           SelectableText(encomendasTrack["codigo"]),
-                          SizedBox(width: 190,),
-                          Icon(Icons.mail,size: 30,),
+                          const SizedBox(width: 190,),
+                          const Icon(Icons.mail,size: 30,),
                           Text( encomendasTrack["servico"]),
                         ],
                       ),
                       ),
                   ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                   itemCount:
+                      // ignore: unnecessary_null_comparison
                       encomendasTrack == null ? 0 : encomendasTrack["quantidade"],
                   itemBuilder: (BuildContext context, int index) {
                     return SingleChildScrollView(
@@ -76,11 +75,11 @@ class _HomePageState extends State<HomePage> {
                         Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: Colors.grey, width: 2),
+                          side: const BorderSide(color: Colors.grey, width: 2),
                         ),
                         color: Colors.grey[100],
                         child: Container(
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -94,19 +93,19 @@ class _HomePageState extends State<HomePage> {
                                         Text(' '+
                                       encomendasTrack["eventos"][index]["status"]
                                           .toString(),
-                                      style: TextStyle(fontSize: 20),
+                                      style: const TextStyle(fontSize: 20),
                                     ),
                                       ],
                                     ),
                                     Text("No dia: "+
                                       encomendasTrack["eventos"][index]["data"]
                                           .toString(),
-                                      style: TextStyle(fontSize: 20),
+                                      style: const TextStyle(fontSize: 20),
                                     ),
                                     Text('De: '+
                                       encomendasTrack["eventos"][index]["local"]
                                           .toString(),
-                                      style: TextStyle(fontSize: 20),
+                                      style: const TextStyle(fontSize: 20),
                                     ),
                                   ],
                                 ),
@@ -121,9 +120,16 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ],),
               );
+            }
+            if(snapshot.hasError){
+              return const Error_Page();
             }else {
               return Center(
-                child: Platform.isAndroid ? CircularProgressIndicator() : CupertinoActivityIndicator(),
+                child: Platform.isAndroid ? const CircularProgressIndicator(
+                  color: Colors.purple,
+                ) : const CupertinoActivityIndicator(
+                  
+                ),
               );
             }
           },

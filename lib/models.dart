@@ -1,10 +1,10 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
-final String encomendaTable = 'encomendaTable';
-final String idColumn = 'idColumn';
-final String titleColumn = 'titleColumn';
-final String trackcodeColumn = 'trackcodeColumn';
+const String encomendaTable = 'encomendaTable';
+const String idColumn = 'idColumn';
+const String titleColumn = 'titleColumn';
+const String trackcodeColumn = 'trackcodeColumn';
 
 class EncomendaHelper {
   static final EncomendaHelper _instance = EncomendaHelper.internal();
@@ -48,7 +48,7 @@ class EncomendaHelper {
      where: "$idColumn = ?",
      whereArgs: [id]
      );
-     if(maps.length> 0){
+     if(maps.isNotEmpty){
        return TransactionsM.fromMap(maps.first);
      }
      else{

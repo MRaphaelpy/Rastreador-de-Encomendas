@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// ignore: camel_case_types
 class Help_Page extends StatefulWidget {
   const Help_Page({Key? key}) : super(key: key);
 
@@ -9,6 +10,7 @@ class Help_Page extends StatefulWidget {
   _Help_PageState createState() => _Help_PageState();
 }
 
+// ignore: camel_case_types
 class _Help_PageState extends State<Help_Page> {
   void _lunchlink(String url) async {
     if (await canLaunch(url)) {
@@ -20,11 +22,11 @@ class _Help_PageState extends State<Help_Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Agradecimentos e Ajuda",),
+        title: const Text("Agradecimentos e Ajuda",),
         centerTitle: true,
         backgroundColor: Colors.purple,
       ),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         child: Center(
           child: ListView(
@@ -37,7 +39,7 @@ class _Help_PageState extends State<Help_Page> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               ListTile(
@@ -46,18 +48,18 @@ class _Help_PageState extends State<Help_Page> {
                     "images/eladio.jpg",
                   ),
                 ),
-                title: Center(
+                title: const Center(
                   child: Text(
                     "Eladio Leal",
                     style: TextStyle(fontSize: 25),
                   ),
                 ),
-                subtitle: Center(
+                subtitle: const Center(
                   child: Text("Json Helper"),
                 ),
                 onTap: () => _lunchlink("https://github.com/eladiolink"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               ListTile(
@@ -66,13 +68,14 @@ class _Help_PageState extends State<Help_Page> {
                     "images/claubert.jpg",
                   ),
                 ),
-                title: Center(
-                  child: Text(
+                title: const Center(
+                  // ignore: unnecessary_const
+                  child: const Text(
                     "Claubert Vinicius",
                     style: TextStyle(fontSize: 25),
                   ),
                 ),
-                subtitle: Center(
+                subtitle: const Center(
                   child: Text("Styler Helper"),
                 ),
                 onTap: () => _lunchlink("https://github.com/claubertamsd"),
@@ -80,10 +83,10 @@ class _Help_PageState extends State<Help_Page> {
               Center(
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 80,
                     ),
-                    Text(
+                    const Text(
                       "Encontrou algum erro ou Bug me contate por aqui: ",
                       style: TextStyle(
                         fontSize: 20,
@@ -93,20 +96,20 @@ class _Help_PageState extends State<Help_Page> {
                     TextButton.icon(
                       onPressed: () =>
                           _lunchlink('https://www.instagram.com/mraphael.py/'),
-                      icon: Icon(Icons.photo),
-                      label: Text("Instagram"),
+                      icon: const Icon(Icons.photo),
+                      label: const Text("Instagram"),
                     ),
                     TextButton.icon(
                       onPressed: () =>
                           _lunchlink('tel: 88988713731'),
-                      icon: Icon(Icons.phone),
-                      label: Text("Wpp ou Telefone"),
+                      icon: const Icon(Icons.phone),
+                      label: const Text("Wpp ou Telefone"),
                     ),
                     TextButton.icon(
                       onPressed: () =>
                           _lunchlink('mailto:mraphael.py@gmail.com'),
-                      icon: Icon(Icons.mail),
-                      label: Text("Email"),
+                      icon: const Icon(Icons.mail),
+                      label: const Text("Email"),
                     ),
                   ],
                 ),
