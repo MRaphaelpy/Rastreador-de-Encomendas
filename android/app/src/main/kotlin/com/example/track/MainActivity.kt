@@ -1,4 +1,4 @@
-package com.example.track
+package br.emperor.track
 
 import io.flutter.embedding.android.FlutterActivity
 

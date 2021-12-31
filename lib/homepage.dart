@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:track/error_page.dart';
+import 'package:sizer/sizer.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
@@ -31,110 +32,112 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-       //   extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          title: Text(widget.title.toString()),
-          backgroundColor: Colors.purple,
-        ),
-        body: FutureBuilder(
-          future: _getData(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                  Image.asset("images/background.jpg"),
-                  Container(
-                        decoration: BoxDecoration(
-                          border:Border.all(color: Colors.black) ,
-                          color: Colors.purple[200]
-                        ),
-                        child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.qr_code,size: 30,),
-                          SelectableText(encomendasTrack["codigo"]),
-                          const SizedBox(width: 190,),
-                          const Icon(Icons.mail,size: 30,),
-                          Text( encomendasTrack["servico"]),
-                        ],
+    return Sizer(builder: (context, orientation, deviceType){
+      return Scaffold(
+     //   extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Text(widget.title.toString()),
+        backgroundColor: Colors.purple,
+      ),
+      body: FutureBuilder(
+        future: _getData(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                Image.asset("images/background.jpg"),
+                Container(
+                      decoration: BoxDecoration(
+                        border:Border.all(color: Colors.black) ,
+                        color: Colors.purple[200]
                       ),
-                      ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                  itemCount:
-                      // ignore: unnecessary_null_comparison
-                      encomendasTrack == null ? 0 : encomendasTrack["quantidade"],
-                  itemBuilder: (BuildContext context, int index) {
-                    return SingleChildScrollView(
-                      child:Column(
+                      child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.qr_code,size: 30,),
+                        SelectableText(encomendasTrack["codigo"]),
+                        const SizedBox(width: 80,),
+                        const Icon(Icons.mail,size: 30,),
+                        Text( encomendasTrack["servico"]),
+                      ],
+                    ),
+                    ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                itemCount:
+                    // ignore: unnecessary_null_comparison
+                    encomendasTrack == null ? 0 : encomendasTrack["quantidade"],
+                itemBuilder: (BuildContext context, int index) {
+                  return SingleChildScrollView(
+                    child:Container(
+                      width: 20.w,
+                      height: 13.5.h,
+                      child: Column(
                         children: [
-                        Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          side: const BorderSide(color: Colors.grey, width: 2),
-                        ),
-                        color: Colors.grey[100],
-                        child: Container(
-                          padding: const EdgeInsets.all(20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Image.asset("images/direita.gif" ,scale: 05,),
-                                        Text(' '+
-                                      encomendasTrack["eventos"][index]["status"]
-                                          .toString(),
-                                      style: const TextStyle(fontSize: 20),
-                                    ),
-                                      ],
-                                    ),
-                                    Text("No dia: "+
-                                      encomendasTrack["eventos"][index]["data"]
-                                          .toString(),
-                                      style: const TextStyle(fontSize: 20),
-                                    ),
-                                    Text('De: '+
-                                      encomendasTrack["eventos"][index]["local"]
-                                          .toString(),
-                                      style: const TextStyle(fontSize: 20),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
+                        SizedBox(
+                          height: 110,
+                          child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: const BorderSide(color: Colors.grey, width: 2),
+                          ),
+                          color: Colors.grey[100],
+                          child:Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Column(
+                                    children: [
+                                      Wrap(
+                                        children: [
+                                          Image.asset("images/direita.gif" ,scale: 05,),
+                                          Text(' '+
+                                        encomendasTrack["eventos"][index]["status"].toString(),
+                                        style: const TextStyle(fontSize: 15),
+                                      ),
+                                        ],
+                                      ),
+                                      Text("No dia: "+
+                                        encomendasTrack["eventos"][index]["data"]
+                                            .toString(),
+                                        style: const TextStyle(fontSize: 15),
+                                      ),
+                                      Text('De: '+encomendasTrack["eventos"][index]["local"].toString(),
+                                        style: const TextStyle(fontSize: 15),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      ],) ,
-                    );
-                  },
-                ),
-                ],),
-              );
-            }
-            if(snapshot.hasError){
-              return const Error_Page();
-            }else {
-              return Center(
-                child: Platform.isAndroid ? const CircularProgressIndicator(
-                  color: Colors.purple,
-                ) : const CupertinoActivityIndicator(
-                  
-                ),
-              );
-            }
-          },
-        ),
+                      
+                      ],),
+                    ) ,
+                  );
+                },
+              ),
+              ],),
+            );
+          }
+          if(snapshot.hasError){
+            return const Error_Page();
+          }else {
+            return Center(
+              child: Platform.isAndroid ? const CircularProgressIndicator(
+                color: Colors.purple,
+              ) : const CupertinoActivityIndicator(
+                
+              ),
+            );
+          }
+        },
       ),
     );
+    });
   }
 }

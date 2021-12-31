@@ -4,7 +4,7 @@ import 'package:track/help_page.dart';
 import 'package:track/homepage.dart';
 import 'package:track/models.dart';
 import 'dialogalert.dart';
-
+import 'package:sizer/sizer.dart';
 void main() {
   runApp(MaterialApp(
     theme: ThemeData(
@@ -35,49 +35,53 @@ class _InicialPageState extends State<InicialPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: Drawer(
-        child: Column(
-          children: [
-            UserAccountsDrawerHeader(
-              currentAccountPicture: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: Image.asset("images/pinguin.jpg")),
-              decoration: const BoxDecoration(color: Colors.purple),
-              accountName: null,
-              accountEmail: null,
-            ),
-            ListTile(
-              leading: const Icon(Icons.help),
-              title: const Text("Agradecimentos e Ajuda"),
-              subtitle: const Text("Pessoas que ajudaram, Links uteis e Ajuda"),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Help_Page()));
-              },
-            ),
-          ],
+    return Sizer(
+      builder: (context, orientacion, devicetipe){
+      return Scaffold(
+        drawer: Drawer(
+          child: Column(
+            children: [
+              UserAccountsDrawerHeader(
+                currentAccountPicture: ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: Image.asset("images/pinguin.jpg")),
+                decoration: const BoxDecoration(color: Colors.purple),
+                accountName: null,
+                accountEmail: null,
+              ),
+              ListTile(
+                leading: const Icon(Icons.help),
+                title: const Text("Agradecimentos e Ajuda"),
+                subtitle: const Text("Pessoas que ajudaram, Links uteis e Ajuda"),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Help_Page()));
+                },
+              ),
+            ],
+          ),
         ),
-      ),
-      backgroundColor: Colors.grey[350],
-      appBar: AppBar(
-        title: const Text("Rastreamento"),
-        centerTitle: true,
-        backgroundColor: Colors.purple,
-      ),
-      body: ListView.builder(
-          itemCount: transaction.length,
-          itemBuilder: (context, index) {
-            return _encomendasCard(context, index);
-          }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showEncomendas();
-        },
-        child: const Icon(Icons.add),
-        backgroundColor: Colors.purple,
-        shape: const OutlineInputBorder(),
-      ),
+        backgroundColor: Colors.grey[350],
+        appBar: AppBar(
+          title: const Text("Rastreamento"),
+          centerTitle: true,
+          backgroundColor: Colors.purple,
+        ),
+        body: ListView.builder(
+            itemCount: transaction.length,
+            itemBuilder: (context, index) {
+              return _encomendasCard(context, index);
+            }),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _showEncomendas();
+          },
+          child: const Icon(Icons.add),
+          backgroundColor: Colors.purple,
+          shape: const OutlineInputBorder(),
+        ),
+      );
+      }
     );
   }
 
