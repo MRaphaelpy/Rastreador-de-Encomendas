@@ -24,7 +24,7 @@ class _EncomendasPageState extends State<EncomendasPage> {
 
   Future _getData() async {
     var response = await http.get(Uri.parse(
-        "https://api.linketrack.com/track/json?user=nitrocraftgamer@gmail.com&token=5e5c4c86c8300b934b1c9b372555c97ff629dc39bd9fb6ff6703c65b6003c468&codigo=${widget.codigo}"));
+        "YOUR TOKEN HERE${widget.codigo}"));
 
       encomendasTrack = jsonDecode(response.body);
     return encomendasTrack;
