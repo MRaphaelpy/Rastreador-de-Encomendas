@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 // ignore: camel_case_types
 class Error_Page extends StatefulWidget {
@@ -14,30 +13,32 @@ class _Error_PageState extends State<Error_Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        // ignore: avoid_unnecessary_containers
         child: Container(
           child: Column(children: [
-           Text("Oops!!, Algo deu errado...",style: TextStyle(
+           Center(child: Text("Oops!!, Algo deu \n         errado...",style: TextStyle(
                   fontSize: 35,
                   color: Colors.purple[800],
                   fontWeight: FontWeight.bold,
                 ),
-                ),
+                ),),
                 Image.asset("images/errorRobot.png"),
-                Text("Verifique o codigo de rastreio.",style: TextStyle(
+                // ignore: prefer_const_constructors
+                Text("Verifique o codigo de rastreio.",style: const TextStyle(
                   fontSize: 20,
                   color: Colors.black87
                 ),
                 ),
-                Text("Talvez sua Encomenda nao \n      tenha sido postada.",style: TextStyle(
+             const   Text("Talvez sua Encomenda não \n      tenha sido postada.",style: TextStyle(
                   fontSize: 22,
                   color: Colors.black87
                 ),
                 ),
             Align(
-              heightFactor: 7,
+              heightFactor: 5,
               alignment: Alignment.bottomCenter,
               child:SizedBox(
-            width: 400,
+            width: 300,
             height: 50,
             child: ElevatedButton(
               style: ButtonStyle(

@@ -1,15 +1,14 @@
-// ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:track/help_page.dart';
-import 'package:track/homepage.dart';
+import 'package:track/encomendaspage.dart';
 import 'package:track/models.dart';
 import 'dialogalert.dart';
 import 'package:sizer/sizer.dart';
+
 void main() {
   runApp(MaterialApp(
     theme: ThemeData(
         primaryColor: Colors.purple,
-     //   hintColor: Colors.purple,
         accentColor: Colors.purple,
         visualDensity: VisualDensity.adaptivePlatformDensity),
     home: const InicialPage(),
@@ -35,8 +34,7 @@ class _InicialPageState extends State<InicialPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-      builder: (context, orientacion, devicetipe){
+    return Sizer(builder: (context, orientacion, devicetipe) {
       return Scaffold(
         drawer: Drawer(
           child: Column(
@@ -52,10 +50,15 @@ class _InicialPageState extends State<InicialPage> {
               ListTile(
                 leading: const Icon(Icons.help),
                 title: const Text("Agradecimentos e Ajuda"),
-                subtitle: const Text("Pessoas que ajudaram, Links uteis e Ajuda"),
+                subtitle:
+                    const Text("Pessoas que ajudaram, Links uteis e Ajuda"),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Help_Page()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Help_Page(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -68,10 +71,12 @@ class _InicialPageState extends State<InicialPage> {
           backgroundColor: Colors.purple,
         ),
         body: ListView.builder(
+
             itemCount: transaction.length,
             itemBuilder: (context, index) {
-              return _encomendasCard(context, index);
-            }),
+            return _encomendasCard(context, index);
+            },
+            ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             _showEncomendas();
@@ -81,13 +86,12 @@ class _InicialPageState extends State<InicialPage> {
           shape: const OutlineInputBorder(),
         ),
       );
-      }
-    );
+    },);
   }
-
   Widget _encomendasCard(BuildContext context, int index) {
     return GestureDetector(
       child: Card(
+        elevation: 12,
         shape: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         child: ListTile(
           trailing: Wrap(
@@ -119,7 +123,8 @@ class _InicialPageState extends State<InicialPage> {
                                   ),
                                   const Text(
                                     "Deseja excluir está encomenda?",
-                                    style: TextStyle(color: Colors.purple),
+                                    style: TextStyle(
+                                        color: Colors.purple, fontSize: 18),
                                   ),
                                 ],
                               ),
@@ -206,14 +211,22 @@ class _InicialPageState extends State<InicialPage> {
           ),
           leading: Image.asset("images/truckan.gif"),
           title: Text(transaction[index].title ?? ""),
-          subtitle: Text(transaction[index].trackCode),
+          subtitle: Row(
+            children: [
+              Image.asset(
+                "images/code.gif",
+                scale: 13,
+              ),
+              Text(transaction[index].trackCode.toString().toUpperCase())
+            ],
+          ),
         ),
       ),
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => HomePage(
+                builder: (context) => EncomendasPage(
                       title: transaction[index].title,
                       codigo: transaction[index].trackCode,
                     )));
@@ -223,25 +236,25 @@ class _InicialPageState extends State<InicialPage> {
 
   void _showEncomendas({TransactionsM? encomenda}) async {
     final recEncomenda = await showGeneralDialog(
-    barrierColor: Colors.black.withOpacity(0.5),
-    transitionBuilder: (context, a1, a2, widget) {
-      return Transform.scale(
-        scale: a1.value,
-        child: Opacity(
-          opacity: a1.value,
-          child:DialogBom_Alert(
-            encomenda: encomenda,
-          ),
-        ),
-      );
-    },
-    transitionDuration: const Duration(milliseconds: 200),
-    barrierDismissible: true,
-    barrierLabel: '',
-    context: context,
-    pageBuilder: (context, animation1, animation2) {
-      return widget;
-    });
+        barrierColor: Colors.black.withOpacity(0.5),
+        transitionBuilder: (context, a1, a2, widget) {
+          return Transform.scale(
+            scale: a1.value,
+            child: Opacity(
+              opacity: a1.value,
+              child: DialogBom_Alert(
+                encomenda: encomenda,
+              ),
+            ),
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 200),
+        barrierDismissible: true,
+        barrierLabel: '',
+        context: context,
+        pageBuilder: (context, animation1, animation2) {
+          return widget;
+        });
     if (recEncomenda != null) {
       if (encomenda != null) {
         await helper.updateEncomenda(recEncomenda);
@@ -261,5 +274,3 @@ class _InicialPageState extends State<InicialPage> {
     });
   }
 }
-
-

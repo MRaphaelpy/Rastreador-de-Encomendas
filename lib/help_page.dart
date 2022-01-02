@@ -87,7 +87,7 @@ class _Help_PageState extends State<Help_Page> {
                       height: 80,
                     ),
                     const Text(
-                      "Encontrou algum erro ou Bug me contate por aqui: ",
+                      "Encontrou algum erro ou Bug \n         me contate por aqui: ",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

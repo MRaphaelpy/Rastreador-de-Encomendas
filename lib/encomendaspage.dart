@@ -7,18 +7,18 @@ import 'package:track/error_page.dart';
 import 'package:sizer/sizer.dart';
 
 // ignore: must_be_immutable
-class HomePage extends StatefulWidget {
+class EncomendasPage extends StatefulWidget {
 
 String? codigo;
 String? title;
 
-HomePage({Key? key, this.codigo, this.title}) : super(key: key);
+EncomendasPage({Key? key, this.codigo, this.title}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _EncomendasPageState createState() => _EncomendasPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _EncomendasPageState extends State<EncomendasPage> {
   
   Map encomendasTrack = {};
 
@@ -34,16 +34,20 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType){
       return Scaffold(
+        backgroundColor: Colors.grey[350],
      //   extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(widget.title.toString()),
+        centerTitle: true,
         backgroundColor: Colors.purple,
       ),
       body: FutureBuilder(
         future: _getData(),
         builder: (context, snapshot) {
+          
           if (snapshot.hasData) {
             return SingleChildScrollView(
+              
               child: Column(
                 children: [
                 Image.asset("images/background.jpg"),
@@ -57,20 +61,26 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         const Icon(Icons.qr_code,size: 30,),
                         SelectableText(encomendasTrack["codigo"]),
-                        const SizedBox(width: 80,),
+                        const SizedBox(width: 90,),
                         const Icon(Icons.mail,size: 30,),
-                        Text( encomendasTrack["servico"]),
+                        Text(encomendasTrack['servico'].toString()),
                       ],
                     ),
                     ),
                 ListView.builder(
+                  
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                 itemCount:
                     // ignore: unnecessary_null_comparison
                     encomendasTrack == null ? 0 : encomendasTrack["quantidade"],
                 itemBuilder: (BuildContext context, int index) {
+                  final String statusEncomenda = encomendasTrack["eventos"][index]["status"];
+                  final String dataEncomenda = encomendasTrack["eventos"][index]["data"];
+                  final String localEncomenda = encomendasTrack["eventos"][index]["local"];
+
                   return SingleChildScrollView(
+                    // ignore: sized_box_for_whitespace
                     child:Container(
                       width: 20.w,
                       height: 13.5.h,
@@ -79,9 +89,11 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(
                           height: 110,
                           child: Card(
-                          shape: RoundedRectangleBorder(
+                            shadowColor: Colors.purple,
+                            elevation: 6,
+                            shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
-                            side: const BorderSide(color: Colors.grey, width: 2),
+                            side: const BorderSide(color: Colors.grey, width: 0.3),
                           ),
                           color: Colors.grey[100],
                           child:Row(
@@ -91,37 +103,44 @@ class _HomePageState extends State<HomePage> {
                                   alignment: Alignment.centerLeft,
                                   child: Column(
                                     children: [
-                                      Wrap(
-                                        children: [
-                                          Image.asset("images/direita.gif" ,scale: 05,),
-                                          Text(' '+
-                                        encomendasTrack["eventos"][index]["status"].toString(),
-                                        style: const TextStyle(fontSize: 15),
+                                      Center(
+                                        heightFactor: 2,
+                                        child: Wrap(
+                                          children: [
+                                            Image.asset("images/direita.gif" ,scale: 8,),
+                                            Text(' '+statusEncomenda,
+                                                    style: const TextStyle(
+                                                    fontSize: 15,
+                                                    ),
+                                              ),
+                                          ],
+                                        ),
                                       ),
-                                        ],
+                                      Text("No dia: "+dataEncomenda,
+                                          style: const TextStyle(
+                                          fontSize: 15,
+                                          ),
                                       ),
-                                      Text("No dia: "+
-                                        encomendasTrack["eventos"][index]["data"]
-                                            .toString(),
-                                        style: const TextStyle(fontSize: 15),
-                                      ),
-                                      Text('De: '+encomendasTrack["eventos"][index]["local"].toString(),
-                                        style: const TextStyle(fontSize: 15),
+                                      Text('De: '+localEncomenda,
+                                        style: const TextStyle(
+                                        fontSize: 15,
+                                        ),
                                       ),
                                     ],
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
                         ),
-                      
-                      ],),
+                      ],
+                      ),
                     ) ,
                   );
                 },
               ),
-              ],),
+              ],
+              ),
             );
           }
           if(snapshot.hasError){
@@ -130,14 +149,13 @@ class _HomePageState extends State<HomePage> {
             return Center(
               child: Platform.isAndroid ? const CircularProgressIndicator(
                 color: Colors.purple,
-              ) : const CupertinoActivityIndicator(
-                
-              ),
+              ) : const CupertinoActivityIndicator(),
             );
           }
         },
       ),
     );
-    });
+    },
+    );
   }
 }
