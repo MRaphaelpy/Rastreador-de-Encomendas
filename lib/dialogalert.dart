@@ -1,5 +1,5 @@
 // ignore_for_file: deprecated_member_use
-import 'package:track/models.dart';
+import './src/models/models.dart';
 import 'package:validatorless/validatorless.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +53,10 @@ class _DialogBom_AlertState extends State<DialogBom_Alert> {
       shape: const RoundedRectangleBorder(
           // ignore: unnecessary_const
           borderRadius: const BorderRadius.all(Radius.circular(30))),
-      title: const Text("Adicionar Codigo", style: TextStyle(color: Colors.purple),),
+      title: const Text(
+        "Adicionar Codigo",
+        style: TextStyle(color: Colors.purple),
+      ),
       content: Wrap(
         children: [
           Form(

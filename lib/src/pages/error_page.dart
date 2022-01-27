@@ -21,7 +21,8 @@ class _Error_PageState extends State<Error_Page> {
                   color: Colors.purple[800],
                   fontWeight: FontWeight.bold,
                 ),
-                ),),
+                ),
+                ),
                 Image.asset("images/errorRobot.png"),
                 // ignore: prefer_const_constructors
                 Text("Verifique o codigo de rastreio.",style: const TextStyle(
@@ -63,7 +64,8 @@ class _Error_PageState extends State<Error_Page> {
          const   SizedBox(
               height: 10,
             ),
-          ],),
+          ],
+          ),
           ),
       ),
     );
