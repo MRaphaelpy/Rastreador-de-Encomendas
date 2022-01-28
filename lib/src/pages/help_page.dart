@@ -22,7 +22,9 @@ class _Help_PageState extends State<Help_Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Agradecimentos e Ajuda",),
+        title: const Text(
+          "Agradecimentos e Ajuda",
+        ),
         centerTitle: true,
         backgroundColor: Colors.purple,
       ),
@@ -34,9 +36,7 @@ class _Help_PageState extends State<Help_Page> {
               Center(
                 child: Text(
                   "Obrigado pela Ajuda",
-                  style: GoogleFonts.pacifico(
-                    fontSize: 30
-                  ),
+                  style: TextStyle(fontSize: 30),
                 ),
               ),
               const SizedBox(
@@ -100,8 +100,7 @@ class _Help_PageState extends State<Help_Page> {
                       label: const Text("Instagram"),
                     ),
                     TextButton.icon(
-                      onPressed: () =>
-                          _lunchlink('tel: 88988713731'),
+                      onPressed: () => _lunchlink('tel: 88988713731'),
                       icon: const Icon(Icons.phone),
                       label: const Text("Wpp ou Telefone"),
                     ),

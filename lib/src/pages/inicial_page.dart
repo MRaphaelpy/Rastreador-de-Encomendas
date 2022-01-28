@@ -5,6 +5,8 @@ import '../../dialogalert.dart';
 import 'encomendaspage.dart';
 
 class InicialPage extends StatefulWidget {
+  const InicialPage({Key? key}) : super(key: key);
+
   @override
   _InicialPageState createState() => _InicialPageState();
 }
@@ -38,7 +40,7 @@ class _InicialPageState extends State<InicialPage> {
             },
             child: const Icon(Icons.add),
             backgroundColor: Colors.purple,
-            shape: const OutlineInputBorder(),
+            //  shape: const OutlineInputBorder(),
           ),
         );
       },
@@ -54,6 +56,7 @@ class _InicialPageState extends State<InicialPage> {
           trailing: Wrap(
             children: [
               IconButton(
+                color: Colors.purple[300],
                 onPressed: () {
                   showGeneralDialog(
                       barrierColor: Colors.black.withOpacity(0.5),
@@ -162,6 +165,7 @@ class _InicialPageState extends State<InicialPage> {
                 onPressed: () {
                   _showEncomendas(encomenda: transaction[index]);
                 },
+                color: Colors.purple[300],
                 icon: const Icon(Icons.edit),
               )
             ],

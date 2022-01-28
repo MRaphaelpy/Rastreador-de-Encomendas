@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+// ignore: must_be_immutable
 class ListViwerBuilder extends StatelessWidget {
   Map? encomendasTrack;
 
-  ListViwerBuilder({this.encomendasTrack});
+  ListViwerBuilder({Key? key, this.encomendasTrack}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

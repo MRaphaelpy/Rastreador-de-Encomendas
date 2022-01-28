@@ -4,6 +4,8 @@ import 'package:track/src/pages/help_page.dart';
 import 'package:track/src/pages/inicial_page.dart';
 
 class ThemesController extends StatelessWidget {
+  const ThemesController({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ThemeModel>(
@@ -53,11 +55,11 @@ class ThemesController extends StatelessWidget {
                     onPressed: () {
                       model.toggleMode();
                     },
-                    icon: Icon(Icons.dark_mode),
+                    icon: const Icon(Icons.dark_mode),
                   ),
                 ],
               ),
-              body: InicialPage(),
+              body: const InicialPage(),
             ),
           );
         },
@@ -65,8 +67,6 @@ class ThemesController extends StatelessWidget {
     );
   }
 }
-
-//model.toggleMode();
 class ThemeModel with ChangeNotifier {
   ThemeMode _mode;
   ThemeMode get mode => _mode;
